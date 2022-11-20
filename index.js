@@ -60,7 +60,7 @@ online!
 listening on port: ${port}
 
 frontend:
-https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/
+http://localhost:${port}
     `);
   }, 1000);
 });

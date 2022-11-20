@@ -1,5 +1,5 @@
 var crypt = "encrypt";
-document.querySelector('form').onchange = () => {
+document.querySelector('#form').onchange = () => {
   crypt = document.querySelector('input[name = "method"]:checked').value;
   
   document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name = "method"]:checked').value}`;
