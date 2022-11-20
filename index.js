@@ -41,9 +41,15 @@ app.post("/crypt", (req, res) => {
   }
 });
 
+app.all("/uptime", (req, res) => {
+  var usp = new URLSearchParams(req.query);
+  usp.has("hhmmss") ? res.send(process.uptime().toString().toHHMMSS()) : res.send(parseInt(process.uptime()).toString());
+});
+
 app.use((req, res, next) => {
-  res.status(404).sendFile('/home/runner/clowncryption-frontend/404.html')
+  res.status(404).sendFile('/home/runner/clowncryption-frontend/public/404.html')
 })
+
 app.listen(port, () => {
   setInterval(() => {
     console.clear();
@@ -52,6 +58,9 @@ Uptime: ${process.uptime().toString().toHHMMSS()}
 
 online!
 listening on port: ${port}
+
+frontend:
+https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/
     `);
   }, 1000);
 });
