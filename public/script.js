@@ -45,7 +45,7 @@ if ('serviceWorker' in navigator) {
 // create the editor
 const container = document.getElementById("jsoneditor")
 const options = {
-mode: ["text"]
+  mode: "code"
 }
 const editor = new JSONEditor(container, options)
 

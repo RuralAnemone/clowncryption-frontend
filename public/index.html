@@ -12,7 +12,8 @@
   <script defer src="./script.js"></script>
   <script src="https://unpkg.com/bowser@2.7.0/es5.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/josdejong/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
-  <link href="https://cdn.jsdelivr.net/gh/josdejong/jsoneditor/examples/css/darktheme.css" rel="stylesheet" type="text/css">
+  <!-- don't you dare uncoment this: -->
+  <!-- <link href="https://cdn.jsdelivr.net/gh/josdejong/jsoneditor/examples/css/darktheme.css" rel="stylesheet" type="text/css"> -->
   <script src="https://cdn.jsdelivr.net/gh/josdejong/jsoneditor/dist/jsoneditor.min.js"></script>
   <script defer src="./jsoneditor.js"></script>
 </head>
@@ -29,8 +30,12 @@
     <input type="text" name="key" placeholder="encryption key" id="key-input">
     <input type="text" name="iv" placeholder="initialization vector">
     <input type="text" name="salt" placeholder="salt (hardcoded as &quot;pepper&quot;???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????)" disabled>
-    <div id="jsoneditor" style="width: 400px; height: 400px;"></div>
-    <br>
+    <details>
+      <summary>
+        custom charset (yes it's lightmode :) 🤡🤓 deal with it)
+      </summary>
+      <div id="jsoneditor" style="width: 400px; height: 400px;"></div>
+    </details>
     <textarea name="message" placeholder="message to encrypt" id="text-input"></textarea>
     <br>
     <input type="submit" value="Encrypt!" onclick="submit()" disabled>
