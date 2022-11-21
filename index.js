@@ -24,7 +24,7 @@ String.prototype.toHHMMSS = function() {
 // server
 app.use("/", express.static(path.join(__dirname, 'public')));
 
-app.post("/crypt", (req, res) => {
+app.get("/crypt", (req, res) => {
   const usp = new URLSearchParams(req.query);
   if (usp.get(method) == "encrypt") {
     res.send(ClownCryption.encrypt({
@@ -54,6 +54,7 @@ app.listen(port, () => {
   setInterval(() => {
     console.clear();
     console.log(`
+
 Uptime: ${process.uptime().toString().toHHMMSS()}
 
 online!
@@ -61,6 +62,9 @@ listening on port: ${port}
 
 frontend:
 http://localhost:${port}
+
+replit url (if applicable):
+https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/
     `);
   }, 1000);
 });

@@ -16,6 +16,7 @@ function submit () {
   var message = document.querySelector('#text-input').value;
   var salt = document.querySelector('input[name = "salt"]').value; // hehe pepper
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`);
+  xhr.open('GET', `./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`);
+  console.log(xhr)
   // okay I'm done for now lol
 }
