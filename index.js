@@ -1,5 +1,6 @@
+// ---------------------------------
+
 // variables and prototypes
-// ---------
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -24,43 +25,51 @@ String.prototype.toHHMMSS = function() {
 // server
 app.use("/", express.static(path.join(__dirname, 'public')));
 
-app.post("/crypt", (req, res) => {
+app.get("/crypt", (req, res) => {
   const usp = new URLSearchParams(req.query);
-  if (usp.get(method) == "encrypt") {
+  if (usp.get("method") == "encrypt") {
     res.send(ClownCryption.encrypt({
-      message: usp.get(message),
-      key: usp.get(key),
-      iv: usp.get(iv)
+      message: usp.get("message"),
+      key: usp.get("key"),
+      iv: usp.get("iv")
     }))
-  } else if (usp.get(method) == "decrypt") {
+  } else if (usp.get("method") == "decrypt") {
     res.send(ClownCryption.decrypt({
-      message: usp.get(message),
-      key: usp.get(key),
-      iv: usp.get(iv)
+      message: usp.get("message"),
+      key: usp.get("key"),
+      iv: usp.get("iv")
     }))
   }
 });
 
-app.all("/uptime", (req, res) => {
+app.all('/uptime', (req, res) => {
   var usp = new URLSearchParams(req.query);
   usp.has("hhmmss") ? res.send(process.uptime().toString().toHHMMSS()) : res.send(parseInt(process.uptime()).toString());
 });
 
-app.use((req, res, next) => {
-  res.status(404).sendFile('/home/runner/clowncryption-frontend/public/404.html')
+app.all('/charset', (req, res) => {
+  res.send(ClownCryption.charsets);
 })
 
+app.use((req, res, next) => {
+  res.status(404).sendFile(`${process.cwd()}/public/404.html`)
+ })
+ 
 app.listen(port, () => {
   setInterval(() => {
     console.clear();
-    console.log(`
-Uptime: ${process.uptime().toString().toHHMMSS()}
+    console.log(`Uptime: ${process.uptime().toString().toHHMMSS()}
 
 online!
 listening on port: ${port}
 
 frontend:
-https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/
-    `);
+http://localhost:${port}
+
+
+replit url (if applicable):`)
+    if (process.env.REPL_ID) {
+      console.log(`https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/`)
+    } else console.log(process.env.REPL_ID)
   }, 1000);
 });
