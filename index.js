@@ -26,17 +26,17 @@ app.use("/", express.static(path.join(__dirname, 'public')));
 
 app.get("/crypt", (req, res) => {
   const usp = new URLSearchParams(req.query);
-  if (usp.get(method) == "encrypt") {
+  if (usp.get("method") == "encrypt") {
     res.send(ClownCryption.encrypt({
-      message: usp.get(message),
-      key: usp.get(key),
-      iv: usp.get(iv)
+      message: usp.get("message"),
+      key: usp.get("key"),
+      iv: usp.get("iv")
     }))
-  } else if (usp.get(method) == "decrypt") {
+  } else if (usp.get("method") == "decrypt") {
     res.send(ClownCryption.decrypt({
-      message: usp.get(message),
-      key: usp.get(key),
-      iv: usp.get(iv)
+      message: usp.get("message"),
+      key: usp.get("key"),
+      iv: usp.get("iv")
     }))
   }
 });
