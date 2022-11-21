@@ -42,10 +42,14 @@ app.get("/crypt", (req, res) => {
   }
 });
 
-app.all("/uptime", (req, res) => {
+app.all('/uptime', (req, res) => {
   var usp = new URLSearchParams(req.query);
   usp.has("hhmmss") ? res.send(process.uptime().toString().toHHMMSS()) : res.send(parseInt(process.uptime()).toString());
 });
+
+app.all('/charset', (req, res) => {
+  res.send(ClownCryption.charsets);
+})
 
 app.use((req, res, next) => {
   res.status(404).sendFile('/home/runner/clowncryption-frontend/public/404.html')
