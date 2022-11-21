@@ -27,3 +27,12 @@ function reqListener() {
   document.querySelector('#result').innerHTML = this.responseText;
   console.log(this)
 }
+
+
+// pwa, except it's funny because I'm not doing this :)
+
+if ('serviceWorker' in navigator) {
+  console.log("[ServiceWorker] install");
+} else {
+  alert(`please upgrade your browser! you seem to be either using a potato or a really low version of ${bowser.getParser(window.navigator.userAgent).parsedResult.browser.name}. please upgrade from v${bowser.getParser(window.navigator.userAgent).parsedResult.browser.version}`);
+}
