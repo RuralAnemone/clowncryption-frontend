@@ -52,9 +52,9 @@ app.all('/charset', (req, res) => {
 })
 
 app.use((req, res, next) => {
-  res.status(404).sendFile('/home/runner/clowncryption-frontend/public/404.html')
-})
-
+  res.status(404).sendFile(`${process.cwd()}/public/404.html`)
+ })
+ 
 app.listen(port, () => {
   setInterval(() => {
     console.clear();
