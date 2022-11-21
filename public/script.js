@@ -1,3 +1,6 @@
+// --------------------------------------------------------------------
+// --------------------------------------------------------------------
+
 var crypt = "encrypt";
 document.querySelector('#form').onchange = () => {
   crypt = document.querySelector('input[name = "method"]:checked').value;
@@ -20,14 +23,13 @@ function submit () {
   // xhr.open('GET', `./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`);
   xhr.open('GET', `./uptime?${crypt == "encrypt" ? "hhmmss" : ""}`);
   xhr.send();
-  // okay I'm done for now lol
 }
 
 function reqListener() {
   document.querySelector('#result').innerHTML = this.responseText;
 }
 
-
+// --------------------------------------------------------------------
 // pwa, except it's funny because I'm not doing this :)
 
 if ('serviceWorker' in navigator) {
@@ -35,3 +37,28 @@ if ('serviceWorker' in navigator) {
 } else {
   alert(`please upgrade your browser! you seem to be either using a potato or a really low version of ${bowser.getParser(window.navigator.userAgent).parsedResult.browser.name}. please upgrade from v${bowser.getParser(window.navigator.userAgent).parsedResult.browser.version}`);
 }
+
+
+// --------------------------------------------------------------------
+// jsoneditor
+
+// create the editor
+const container = document.getElementById("jsoneditor")
+const options = {
+mode: ["text"]
+}
+const editor = new JSONEditor(container, options)
+
+// set json
+const initialJson = {
+    "Array": [1, 2, 3],
+    "Boolean": true,
+    "Null": null,
+    "Number": 123,
+    "Object": {"a": "b", "c": "d"},
+    "String": "Hello World"
+}
+editor.set(initialJson)
+
+// get json
+const updatedJson = editor.get()
