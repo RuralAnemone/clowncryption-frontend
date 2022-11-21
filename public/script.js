@@ -16,7 +16,14 @@ function submit () {
   var message = document.querySelector('#text-input').value;
   var salt = document.querySelector('input[name = "salt"]').value; // hehe pepper
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', `./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`);
-  console.log(xhr)
+  xhr.addEventListener("load", reqListener);
+  // xhr.open('GET', `./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`);
+  xhr.open('GET', `./uptime?${crypt == "encrypt" ? "hhmmss" : ""}`);
+  xhr.send();
   // okay I'm done for now lol
+}
+
+function reqListener() {
+  document.querySelector('#result').innerHTML = this.responseText;
+  console.log(this)
 }
