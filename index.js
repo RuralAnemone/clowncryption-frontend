@@ -54,9 +54,7 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   setInterval(() => {
     console.clear();
-    console.log(`
-
-Uptime: ${process.uptime().toString().toHHMMSS()}
+    console.log(`Uptime: ${process.uptime().toString().toHHMMSS()}
 
 online!
 listening on port: ${port}
@@ -64,8 +62,10 @@ listening on port: ${port}
 frontend:
 http://localhost:${port}
 
-replit url (if applicable):
-https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/
-    `);
+
+replit url (if applicable):`)
+    if (process.env.REPL_ID) {
+      console.log(`https://${process.env.REPL_SLUG.toLowerCase()}.${process.env.REPL_OWNER.toLowerCase()}.repl.co/`)
+    } else console.log(process.env.REPL_ID)
   }, 1000);
 });
