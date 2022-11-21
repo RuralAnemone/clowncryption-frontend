@@ -25,7 +25,6 @@ function submit () {
 
 function reqListener() {
   document.querySelector('#result').innerHTML = this.responseText;
-  console.log(this)
 }
 
 
