@@ -1,3 +1,7 @@
 input[type="text"] {
     resize: both;
 }
+
+.jsonButton {
+    float: right;
+}

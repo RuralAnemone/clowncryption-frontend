@@ -27,19 +27,23 @@ app.use("/", express.static(path.join(__dirname, 'public')));
 
 app.get("/crypt", (req, res) => {
   const usp = new URLSearchParams(req.query);
-  if (usp.get("method") == "encrypt") {
-    res.send(ClownCryption.encrypt({
-      message: usp.get("message"),
-      key: usp.get("key"),
-      iv: usp.get("iv")
-    }))
-  } else if (usp.get("method") == "decrypt") {
-    res.send(ClownCryption.decrypt({
-      message: usp.get("message"),
-      key: usp.get("key"),
-      iv: usp.get("iv")
-    }))
-  }
+  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charset") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
+    if (usp.get("method") == "encrypt") {
+      res.send(ClownCryption.encrypt({
+        message: usp.get("message"),
+        key: usp.get("key"),
+        iv: usp.get("iv"),
+        charset: atob(usp.get("charset"))
+      }))
+    } else if (usp.get("method") == "decrypt") {
+      res.send(ClownCryption.decrypt({
+        message: usp.get("message"),
+        key: usp.get("key"),
+        iv: usp.get("iv"),
+        charset: atob(usp.get("charset"))
+      }))
+    }
+  } else res.send('improper parameters; try again :)')
 });
 
 app.all('/uptime', (req, res) => {
@@ -48,7 +52,7 @@ app.all('/uptime', (req, res) => {
 });
 
 app.all('/charset', (req, res) => {
-  res.send(ClownCryption.charsets);
+  res.send(ClownCryption);
 })
 
 app.use((req, res, next) => {

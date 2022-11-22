@@ -13,15 +13,17 @@ Array.from(document.querySelectorAll('input')).forEach(e => {
 })
 
 function submit () {
-  var method = document.querySelector('input[name = "method"]:checked').value;
-  var key = document.querySelector('#key-input').value;
-  var iv = document.querySelector('input[name = "iv"]').value;
-  var message = document.querySelector('#text-input').value;
-  var salt = document.querySelector('input[name = "salt"]').value; // hehe pepper
+  const method = document.querySelector('input[name = "method"]:checked').value;
+  const key = document.querySelector('#key-input').value;
+  const iv = document.querySelector('input[name = "iv"]').value;
+  const message = document.querySelector('#text-input').value;
+  const salt = document.querySelector('input[name = "salt"]').value; // hehe pepper
+  const charset = updatedJson;
   fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`).then(res => {res.text().then(text => {
     document.querySelector('#result').innerHTML = text;
   })})
 }
+
 
 // --------------------------------------------------------------------
 // pwa, except it's funny because I'm not doing this :)
@@ -34,7 +36,7 @@ if ('serviceWorker' in navigator) {
 
 
 // --------------------------------------------------------------------
-// jsoneditor
+// jsoneditor boilerplate
 
 // create the editor
 const container = document.getElementById("jsoneditor")
@@ -44,15 +46,24 @@ const options = {
 const editor = new JSONEditor(container, options)
 
 // set json
-const initialJson = {
-    "Array": [1, 2, 3],
-    "Boolean": true,
-    "Null": null,
-    "Number": 123,
-    "Object": {"a": "b", "c": "d"},
-    "String": "Hello World"
-}
-editor.set(initialJson)
+editor.set(defaultCharset())
 
 // get json
 const updatedJson = editor.get()
+
+
+// --------------------------------------------------------------------
+// jsoneditor
+
+// I'M NOT READY FOR THE DARK MAGIC YET AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+// const defaultCharsetJson = async ()=>{
+//   const res = await fetch('./json/defaultCharset.json')
+//   return res.json()
+// }
+
+function defaultCharset() {
+  fetch('./json/defaultCharset.json').then(res=>res.json().then(_=>{
+    editor.set(_);
+    return _;
+  }))
+}
