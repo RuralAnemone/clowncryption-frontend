@@ -15,16 +15,19 @@
   <!-- don't you dare uncoment this: -->
   <!-- <link href="https://cdn.jsdelivr.net/gh/josdejong/jsoneditor/examples/css/darktheme.css" rel="stylesheet" type="text/css"> -->
   <script src="https://cdn.jsdelivr.net/gh/josdejong/jsoneditor/dist/jsoneditor.min.js"></script>
-  <script defer src="./jsoneditor.js"></script>
 </head>
 <body>
   <h1>🤡 ClownCryption 🤓</h1>
   <div id="form">
-    <input type="radio" name="method" value="encrypt" checked>
-    <label for="encrypt"><s>encrypt</s> format time</label>
+    <label>
+      <input type="radio" name="method" value="encrypt" checked>
+      encrypt
+    </label>
     <br>
-    <input type="radio" name="method" value="decrypt">
-    <label for="decrypt"><s>decrypt</s> don't format time</label>
+    <label>
+      <input type="radio" name="method" value="decrypt">
+      decrypt
+    </label>
     <br>
     <br>
     <input type="text" name="key" placeholder="encryption key" id="key-input">
@@ -38,8 +41,7 @@
     </details>
     <textarea name="message" placeholder="message to encrypt" id="text-input"></textarea>
     <br>
-    <input type="submit" value="Encrypt!" onclick="submit()" disabled>
-    <button onclick="submit()">get uptime</button>
+    <input type="submit" value="Encrypt!" onclick="submit()">
   </div>
   <br><hr><br>
   <textarea id="result" readonly placeholder="results show up here..."></textarea>
