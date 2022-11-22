@@ -2,6 +2,8 @@
 // --------------------------------------------------------------------
 
 var crypt = "encrypt";
+var charsetType = "hexLiteral";
+
 Array.from(document.querySelectorAll('input')).forEach(e => {
   e.onchange = () => {
     crypt = document.querySelector('input[name = "method"]:checked').value;
@@ -57,12 +59,13 @@ const updatedJson = editor.get()
 
 // I'M NOT READY FOR THE DARK MAGIC YET AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 // const defaultCharsetJson = async ()=>{
-//   const res = await fetch('./json/defaultCharset.json')
+//   const res = await fetch('./json/hexLiteralCharset.json')
 //   return res.json()
 // }
 
 function defaultCharset() {
-  fetch('./json/defaultCharset.json').then(res=>res.json().then(_=>{
+  
+  fetch(`./json/${charsetType}Charset.json`).then(res=>res.json().then(_=>{
     editor.set(_);
     return _;
   }))
