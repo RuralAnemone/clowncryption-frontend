@@ -4,15 +4,13 @@
 var crypt = "encrypt";
 var charsetType = "hexLiteral";
 
-Array.from(document.querySelectorAll('input')).forEach(e => {
-  e.onchange = () => {
-    crypt = document.querySelector('input[name = "method"]:checked').value;
-    document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name = "method"]:checked').value}`;
-    document.querySelector('input[type = "submit"]').value = `${crypt.substring(0,1).toUpperCase()}${crypt.substring(1)}!`;
-    document.querySelector('#key-input').placeholder = `${crypt}ion key`;
-    console.log(crypt);
-  }
-})
+document.querySelector('#form').onchange = () => {
+  crypt = document.querySelector('input[name = "method"]:checked').value;
+  document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name = "method"]:checked').value}`;
+  document.querySelector('input[type = "submit"]').value = `${crypt.substring(0,1).toUpperCase()}${crypt.substring(1)}!`;
+  document.querySelector('#key-input').placeholder = `${crypt}ion key`;
+  console.log(crypt);
+}
 
 function submit () {
   const method = document.querySelector('input[name = "method"]:checked').value;
@@ -64,7 +62,7 @@ const updatedJson = editor.get()
 // }
 
 function defaultCharset() {
-  
+
   fetch(`./json/${charsetType}Charset.json`).then(res=>res.json().then(_=>{
     editor.set(_);
     return _;
