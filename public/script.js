@@ -29,7 +29,7 @@ function submit () {
 if ('serviceWorker' in navigator) {
   console.log("[ServiceWorker] install");
 } else {
-  alert(`please upgrade your browser! you seem to be either using a potato or a really low version of ${bowser.getParser(window.navigator.userAgent).parsedResult.browser.name}. please upgrade from v${bowser.getParser(window.navigator.userAgent).parsedResult.browser.version}`);
+  alert(`please upgrade your browser! you seem to be either using a potato or a really low version of ${bowser.getParser(window.navigator.userAgent).parsedResult.browser.name}. please for the love of everything holy upgrade from v${bowser.getParser(window.navigator.userAgent).parsedResult.browser.version}`);
 }
 
 
