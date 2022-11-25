@@ -32,7 +32,7 @@ function submit () {
 
 
 // --------------------------------------------------------------------
-// pwa, except it's funny because I'm not doing this :)
+// pwa, except it's funny because I'm not doing this
 
 if ('serviceWorker' in navigator) {
   console.log("[ServiceWorker] install");
