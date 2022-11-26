@@ -10,3 +10,9 @@ npm start
 ```
 
 after that, to start, just use `npm start`!
+
+<br><br><br><br>
+
+alternatively, you can just deploy to replit by clicking the button below and just press the big green "Run" button :)
+
+<a target="_blank" href="https://replit.com/github/RuralAnemone/clowncryption-frontend"><img alt="Run on Replit" src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg"></a>
