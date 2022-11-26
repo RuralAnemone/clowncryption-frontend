@@ -1,2 +1,10 @@
 # clowncryption-frontend
-A "simple" frontend for BradyBangasser's ClownCryption (once he actually does stuff with the npm part of it (unless I'm gravely mistaken and also a fool))!
+A "simple" frontend for BradyBangasser's [ClownCryption](https://github.com/bradybangasser/clowncryption)
+
+to run, cd into your preferred directory and clone this project:
+```bash
+cd # directory
+git clone https://github.com/ruralanemone/clowncryption-frontend
+
+npm start
+```
