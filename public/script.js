@@ -24,7 +24,8 @@ function submit () {
   const iv = document.querySelector('input[name = "iv"]').value;
   const message = document.querySelector('#text-input').value;
   const salt = document.querySelector('input[name = "salt"]').value; // hehe pepper
-  const charset = editor.get();
+  const charset = JSON.stringify(editor.get());
+  console.log(JSON.stringify(editor.get()));
   fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`).then(res => {res.text().then(text => {
     document.querySelector('#result').innerHTML = text;
   })})
