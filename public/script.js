@@ -26,7 +26,15 @@ function submit () {
   const salt = document.querySelector('input[name="salt"]').value; // hehe pepper
   const charset = JSON.stringify(editor.get());
   fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}&charsetType=${charsetType}&charset=${charset}`).then(res => {res.text().then(text => {
-    document.querySelector('#result').innerHTML = text;
+    if (text.startsWith("<!")) { // if it's html, you see
+      document.querySelector('iframe').className = 'hidden\'t';
+      document.querySelector('#result').className = 'hidden';
+      document.querySelector('iframe').src = `./iframe#${text}`
+    } else {
+      document.querySelector('iframe').className = 'hidden';
+      document.querySelector('#result').className = 'hidden\'t';
+      document.querySelector('#result').innerHTML = text;
+    }
   })})
 }
 

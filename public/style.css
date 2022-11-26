@@ -5,3 +5,11 @@ input[type="text"] {
 .jsonButton {
     float: right;
 }
+
+.hidden {
+    display: none;
+}
+
+.hidden\'t {
+    display: block;
+}
