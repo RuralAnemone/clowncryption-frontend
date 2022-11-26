@@ -5,7 +5,7 @@ to run, cd into your preferred directory and clone this project:
 ```bash
 cd # directory
 git clone https://github.com/ruralanemone/clowncryption-frontend
-./start.sh
+npm start
 ```
 
-after that, to start either use `npm start` or `node index.js`
+after that, to start, just use `npm start`!
