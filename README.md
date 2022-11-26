@@ -5,6 +5,7 @@ to run, cd into your preferred directory and clone this project:
 ```bash
 cd # directory
 git clone https://github.com/ruralanemone/clowncryption-frontend
+cd clowncryption-frontend
 npm start
 ```
 
