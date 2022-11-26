@@ -27,7 +27,8 @@ app.use("/", express.static(path.join(__dirname, 'public')));
 
 app.get("/crypt", (req, res) => {
   const usp = new URLSearchParams(req.query);
-  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charset") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
+  const charset = new ClownCryption.charsets.eval(usp.get("charsetType").substring(0,1).toUpperCase()+usp.get("charsetType").substring(1)); // delicious!!!! (oh god I hope this works)
+  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && usp.has("charset") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
     if (usp.get("method") == "encrypt") {
       res.send(ClownCryption.encrypt({
         message: usp.get("message"),
