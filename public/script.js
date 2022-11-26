@@ -19,14 +19,13 @@ Array.from(document.querySelectorAll('input[name="charset"]')).forEach(_=>_.onch
 })
 
 function submit () {
-  const method = document.querySelector('input[name = "method"]:checked').value;
+  const method = document.querySelector('input[name="method"]:checked').value;
   const key = document.querySelector('#key-input').value;
-  const iv = document.querySelector('input[name = "iv"]').value;
+  const iv = document.querySelector('input[name="iv"]').value;
   const message = document.querySelector('#text-input').value;
-  const salt = document.querySelector('input[name = "salt"]').value; // hehe pepper
+  const salt = document.querySelector('input[name="salt"]').value; // hehe pepper
   const charset = JSON.stringify(editor.get());
-  console.log(JSON.stringify(editor.get()));
-  fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}`).then(res => {res.text().then(text => {
+  fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}&charsetType=${charsetType}&charset=${charset}`).then(res => {res.text().then(text => {
     document.querySelector('#result').innerHTML = text;
   })})
 }
