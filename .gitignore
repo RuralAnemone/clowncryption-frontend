@@ -1,6 +1,5 @@
 node_modules/
 .vscode/
-.replit
 replit.nix
 package.json
 package-lock.json
