@@ -6,7 +6,7 @@ var charsetType = "hexLiteral";
 
 Array.from(document.querySelectorAll('input[name="method"]')).forEach(_=>_.onchange = () => {
   crypt = document.querySelector('input[name="method"]:checked').value;
-  document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name = "method"]:checked').value}`;
+  document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name="method"]:checked').value}`;
   document.querySelector('input[type="submit"]').value = `${crypt.substring(0,1).toUpperCase()}${crypt.substring(1)}!`;
   document.querySelector('#key-input').placeholder = `${crypt}ion key`;
   console.log(crypt);
