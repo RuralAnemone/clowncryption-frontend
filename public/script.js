@@ -75,7 +75,7 @@ function defaultCharset() {
 
 // css
 var css = document.querySelector('link[rel="stylesheet"]')
-document.querySelectorAll('input').forEach(e => e.onclick =_=> {
+document.querySelectorAll('input[name="stylesheet"]').forEach(e => e.onclick =_=> {
   if (e.value.includes("water")) {
     css.href = `https://cdn.jsdelivr.net/npm/water.css@2/out/${e.value.includes("default") ? "water" : e.value.includes("dark") ? "dark" : "light"}.css`
   } else {
