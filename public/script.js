@@ -4,7 +4,7 @@
 var crypt = "encrypt";
 var charsetType = "hexLiteral";
 
-Array.from(document.querySelectorAll('input[name="method"]')).forEach(_=>_.onchange = () => {
+document.querySelectorAll('input[name="method"]').forEach(_=>_.onchange = () => {
   crypt = document.querySelector('input[name="method"]:checked').value;
   document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name="method"]:checked').value}`;
   document.querySelector('input[type="submit"]').value = `${crypt.substring(0,1).toUpperCase()}${crypt.substring(1)}!`;
@@ -12,7 +12,7 @@ Array.from(document.querySelectorAll('input[name="method"]')).forEach(_=>_.oncha
   console.log(crypt);
 })
 
-Array.from(document.querySelectorAll('input[name="charset"]')).forEach(_=>_.onchange = () => {
+document.querySelectorAll('input[name="charset"]').forEach(_=>_.onchange = () => {
   charsetType = document.querySelector('input[name="charset"]:checked').value;
   console.log(charsetType)
   editor.set(defaultCharset())
@@ -42,28 +42,9 @@ function submit () {
 // --------------------------------------------------------------------
 // pwa, except it's funny because I'm not doing this
 
-if ('serviceWorker' in navigator) {
-  console.log("[ServiceWorker] install");
-} else {
-  alert(`please upgrade your browser! you seem to be either using a potato or a really low version of ${bowser.getParser(window.navigator.userAgent).parsedResult.browser.name}. please for the love of everything holy upgrade from v${bowser.getParser(window.navigator.userAgent).parsedResult.browser.version}`);
-}
+if ('serviceWorker' in navigator) console.log("[ServiceWorker] install");
+else alert(`please upgrade your browser! you seem to be either using a potato or a really low version of ${bowser.getParser(window.navigator.userAgent).parsedResult.browser.name}. please for the love of everything holy upgrade from v${bowser.getParser(window.navigator.userAgent).parsedResult.browser.version}`);
 
-
-// --------------------------------------------------------------------
-// jsoneditor boilerplate
-
-// create the editor
-const container = document.getElementById("jsoneditor")
-const options = {
-  mode: "code"
-}
-const editor = new JSONEditor(container, options)
-
-// set json
-editor.set(defaultCharset())
-
-// get json
-const updatedJson = editor.get()
 
 
 // --------------------------------------------------------------------
@@ -82,3 +63,42 @@ function defaultCharset() {
     return _;
   }))
 }
+
+
+// // footer
+
+// document.body.onscroll =_=> {
+//   if ((window.scrollY / window.innerHeight) < 0.5 /* if user scrolls less than 50% */ ) document.querySelector('footer').style="display:none;"
+//   else document.querySelector('footer').style="position:fixed;display:block;bottom:0;"
+//   console.log(window.scrollY / window.innerHeight)
+// }
+
+// css
+var css = document.querySelector('link[rel="stylesheet"]')
+document.querySelectorAll('input').forEach(e => e.onclick =_=> {
+  if (e.value.includes("water")) {
+    css.href = `https://cdn.jsdelivr.net/npm/water.css@2/out/${e.value.includes("default") ? "water" : e.value.includes("dark") ? "dark" : "light"}.css`
+  } else {
+    css.href = "https://bouncecss.bookie0.repl.co/bounce.css"
+  }
+})
+
+
+
+
+
+// --------------------------------------------------------------------
+// jsoneditor boilerplate
+
+// create the editor
+const container = document.getElementById("jsoneditor")
+const options = {
+  mode: "code"
+}
+const editor = new JSONEditor(container, options)
+
+// set json
+editor.set(defaultCharset())
+
+// get json
+const updatedJson = editor.get()
