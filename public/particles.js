@@ -1,4 +1,4 @@
-particlesJS({
+particlesJS("particles-js",{
   "particles": {
     "number": {
       "value": 23,
@@ -54,7 +54,7 @@ particlesJS({
     },
     "move": {
       "enable": true,
-      "speed": 1,
+      "speed": 69 / 3,
       "direction": "top",
       "random": false,
       "straight": false,
@@ -68,7 +68,7 @@ particlesJS({
     }
   },
   "interactivity": {
-    "detect_on": "canvas",
+    "detect_on": "window",
     "events": {
       "onhover": {
         "enable": true,
