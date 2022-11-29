@@ -29,7 +29,7 @@ function submit () {
     if (text.startsWith("<!")) { // if it's html, you see
       document.querySelector('iframe').className = 'hidden\'t';
       document.querySelector('#result').className = 'hidden';
-      document.querySelector('iframe').src = `./iframe#${text}`
+      document.querySelector('iframe').src = `./iframe#${btoa(text)}`
     } else {
       document.querySelector('iframe').className = 'hidden';
       document.querySelector('#result').className = 'hidden\'t';
