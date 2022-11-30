@@ -2,7 +2,7 @@
 // --------------------------------------------------------------------
 
 var crypt = "encrypt";
-var charsetType = "hexLiteral";
+var charsetType = "default";
 
 document.querySelectorAll('input[name="method"]').forEach(_=>_.onchange = () => {
   crypt = document.querySelector('input[name="method"]:checked').value;
@@ -25,7 +25,7 @@ function submit () {
   const message = document.querySelector('#text-input').value;
   const salt = document.querySelector('input[name="salt"]').value; // hehe pepper
   const charset = JSON.stringify(editor.get());
-  fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}&charsetType=${charsetType}&charset=${charset}`).then(res => {res.text().then(text => {
+  fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}&charsetType=${charsetType}${charsetType!="default"?`&charset=${charset}`:``}`).then(res => {res.text().then(text => {
     if (text.startsWith("<!")) { // if it's html, you see
       document.querySelector('iframe').className = 'hidden\'t';
       document.querySelector('#result').className = 'hidden';

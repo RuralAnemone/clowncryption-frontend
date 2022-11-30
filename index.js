@@ -5,7 +5,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = process.env['PORT'] || 42069;
-const ClownCryption = require('clowncryption');
+const ClownCryption = require('clowncryption').default;
 
 // https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss
 String.prototype.toHHMMSS = function() {
@@ -35,22 +35,40 @@ app.get("/crypt", (req, res) => {
     const charset = new ClownCryption.charsets.EfficientBinaryCharset(JSON.parse(decodedCharset))
   } else if (usp.get("charsetType") == "hexLiteral") {
     const charset = new ClownCryption.charsets.LiteralCharset(JSON.parse(decodedCharset)) // I think this is hexLiteral
+  } else if (usp.get("charsetType") == "default") {
+    // nothing, but still short circuit here
   } else res.send('what in the dickens have you done to the charset?!; you\'re only supposed to edit the emojis!! bad!!!!') // wait no this won't ever execute uhhhhh
-  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && usp.has("charset") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
-    if (usp.get("method") == "encrypt") {
-      res.send(ClownCryption.encrypt({
-        message: usp.get("message"),
-        key: usp.get("key"),
-        iv: usp.get("iv"),
-        charset: charset
-      }))
-    } else if (usp.get("method") == "decrypt") {
-      res.send(ClownCryption.decrypt({
-        message: usp.get("message"),
-        key: usp.get("key"),
-        iv: usp.get("iv"),
-        charset: charset
-      }))
+  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && (usp.has("charset") || usp.get("charsetType") == "default") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
+      if (usp.get("charsetType") == "default") {
+        if (usp.get("method") == "encrypt") {
+          res.send(ClownCryption.encrypt({
+            message: usp.get("message"),
+            key: usp.get("key"),
+            iv: usp.get("iv")
+          }))
+        } else if (usp.get("method") == "decrypt") {
+          res.send(ClownCryption.decrypt({
+            message: usp.get("message"),
+            key: usp.get("key"),
+            iv: usp.get("iv")
+          }))
+        }
+      } else { // look, I know I could've done this better, but I really don't care. it works, but inefficinently, and that's what I'm going for...? for the funny...? I think...?
+        if (usp.get("method") == "encrypt") {
+          res.send(ClownCryption.encrypt({
+            message: usp.get("message"),
+            key: usp.get("key"),
+            iv: usp.get("iv"),
+            charset: charset
+          }))
+        } else if (usp.get("method") == "decrypt") {
+          res.send(ClownCryption.decrypt({
+            message: usp.get("message"),
+            key: usp.get("key"),
+            iv: usp.get("iv"),
+            charset: charset
+          }))
+        }
     }
   } else res.send('improper parameters; try again :)')
 });
