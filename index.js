@@ -43,31 +43,31 @@ app.get("/crypt", (req, res) => {
     if (usp.get("charsetType") != "default") {
       if (usp.get("method") == "encrypt") {
         res.send(ClownCryption.encrypt({
-          message: usp.get("message"),
-          key: usp.get("key"),
-          iv: usp.get("iv"),
+          message: decodeURIComponent(usp.get("message")),
+          key: decodeURIComponent(usp.get("key")),
+          iv: decodeURIComponent(usp.get("iv")),
           charset: charset
         }))
       } else if (usp.get("method") == "decrypt") {
         res.send(ClownCryption.decrypt({
-          message: usp.get("message"),
-          key: usp.get("key"),
-          iv: usp.get("iv"),
+          message: decodeURIComponent(usp.get("message")),
+          key: decodeURIComponent(usp.get("key")),
+          iv: decodeURIComponent(usp.get("iv")),
           charset: charset
         }))
       }
     } else {
       if (usp.get("method") == "encrypt") {
         res.send(ClownCryption.encrypt({
-          message: usp.get("message"),
-          key: usp.get("key"),
-          iv: usp.get("iv")
+          message: decodeURIComponent(usp.get("message")),
+          key: decodeURIComponent(usp.get("key")),
+          iv: decodeURIComponent(usp.get("iv"))
         }))
       } else if (usp.get("method") == "decrypt") {
         res.send(ClownCryption.decrypt({
-          message: usp.get("message"),
-          key: usp.get("key"),
-          iv: usp.get("iv")
+          message: decodeURIComponent(usp.get("message")),
+          key: decodeURIComponent(usp.get("key")),
+          iv: decodeURIComponent(usp.get("iv"))
         }))
       }
     }
