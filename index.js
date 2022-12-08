@@ -35,22 +35,40 @@ app.get("/crypt", (req, res) => {
     const charset = new ClownCryption.charsets.EfficientBinaryCharset(JSON.parse(decodedCharset))
   } else if (usp.get("charsetType") == "hexLiteral") {
     const charset = new ClownCryption.charsets.LiteralCharset(JSON.parse(decodedCharset)) // I think this is hexLiteral
+  } else if (usp.get("charsetType") == "default") {
+    typeof typeof 0; // do nothing
   } else res.send('what in the dickens have you done to the charset?!; you\'re only supposed to edit the emojis!! bad!!!!') // wait no this won't ever execute uhhhhh
-  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && usp.has("charset") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
-    if (usp.get("method") == "encrypt") {
-      res.send(ClownCryption.encrypt({
-        message: usp.get("message"),
-        key: usp.get("key"),
-        iv: usp.get("iv"),
-        charset: charset
-      }))
-    } else if (usp.get("method") == "decrypt") {
-      res.send(ClownCryption.decrypt({
-        message: usp.get("message"),
-        key: usp.get("key"),
-        iv: usp.get("iv"),
-        charset: charset
-      }))
+  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && (usp.has("charset") || usp.get("charsetType") == "default") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
+    if (usp.get("charsetType") != "default") {
+      if (usp.get("method") == "encrypt") {
+        res.send(ClownCryption.encrypt({
+          message: usp.get("message"),
+          key: usp.get("key"),
+          iv: usp.get("iv"),
+          charset: charset
+        }))
+      } else if (usp.get("method") == "decrypt") {
+        res.send(ClownCryption.decrypt({
+          message: usp.get("message"),
+          key: usp.get("key"),
+          iv: usp.get("iv"),
+          charset: charset
+        }))
+      }
+    } else {
+      if (usp.get("method") == "encrypt") {
+        res.send(ClownCryption.encrypt({
+          message: usp.get("message"),
+          key: usp.get("key"),
+          iv: usp.get("iv")
+        }))
+      } else if (usp.get("method") == "decrypt") {
+        res.send(ClownCryption.decrypt({
+          message: usp.get("message"),
+          key: usp.get("key"),
+          iv: usp.get("iv")
+        }))
+      }
     }
   } else res.send('improper parameters; try again :)')
 });
