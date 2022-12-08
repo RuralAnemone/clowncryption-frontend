@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 const port = process.env['PORT'] || 42069;
 const ClownCryption = require('clowncryption').default;
+const { charsets } = require('clowncryption');
 
 // https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss
 String.prototype.toHHMMSS = function() {
@@ -27,14 +28,14 @@ app.use("/", express.static(path.join(__dirname, 'public')));
 
 app.get("/crypt", (req, res) => {
   const usp = new URLSearchParams(req.query);
-  // const charset = new ClownCryption.charsets.eval(usp.get("charsetType").substring(0,1).toUpperCase()+usp.get("charsetType").substring(1)); // delicious!!!! (oh god I hope this works)
+  // const charset = new charsets.eval(usp.get("charsetType").substring(0,1).toUpperCase()+usp.get("charsetType").substring(1)); // delicious!!!! (oh god I hope this works)
   const decodedCharset = decodeURIComponent(usp.get("charset"));
   if (usp.get("charsetType") == "binary") {
-    const charset = new ClownCryption.charsets.BinaryCharset(JSON.parse(decodedCharset))
+    const charset = new charsets.BinaryCharset(JSON.parse(decodedCharset))
   } else if (usp.get("charsetType") == "efficientBinary") {
-    const charset = new ClownCryption.charsets.EfficientBinaryCharset(JSON.parse(decodedCharset))
+    const charset = new charsets.EfficientBinaryCharset(JSON.parse(decodedCharset))
   } else if (usp.get("charsetType") == "hexLiteral") {
-    const charset = new ClownCryption.charsets.LiteralCharset(JSON.parse(decodedCharset)) // I think this is hexLiteral
+    const charset = new charsets.LiteralCharset(JSON.parse(decodedCharset)) // I think this is hexLiteral
   } else if (usp.get("charsetType") == "default") {
     typeof typeof 0; // do nothing
   } else res.send('what in the dickens have you done to the charset?!; you\'re only supposed to edit the emojis!! bad!!!!') // wait no this won't ever execute uhhhhh
