@@ -2,19 +2,19 @@
 // --------------------------------------------------------------------
 
 var crypt = "encrypt";
-var charsetType = "hexLiteral";
+var charsetType = "default";
 
 document.querySelectorAll('input[name="method"]').forEach(_=>_.onchange = () => {
   crypt = document.querySelector('input[name="method"]:checked').value;
   document.querySelector('#text-input').placeholder = `message to ${document.querySelector('input[name="method"]:checked').value}`;
   document.querySelector('input[type="submit"]').value = `${crypt.substring(0,1).toUpperCase()}${crypt.substring(1)}!`;
   document.querySelector('#key-input').placeholder = `${crypt}ion key`;
-  console.log(crypt);
+  // console.log(crypt);
 })
 
 document.querySelectorAll('input[name="charset"]').forEach(_=>_.onchange = () => {
   charsetType = document.querySelector('input[name="charset"]:checked').value;
-  console.log(charsetType)
+  // console.log(charsetType);
   editor.set(defaultCharset())
 })
 
@@ -25,14 +25,14 @@ function submit () {
   const message = document.querySelector('#text-input').value;
   const salt = document.querySelector('input[name="salt"]').value; // hehe pepper
   const charset = JSON.stringify(editor.get());
-  fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}&charsetType=${charsetType}&charset=${charset}`).then(res => {res.text().then(text => {
+  fetch(`./crypt?method=${crypt}&message=${message}&key=${key}&iv=${iv}&charsetType=${charsetType}${charsetType=='default'?'':`&charset=${charset}`}`).then(res => {res.text().then(text => {
     if (text.startsWith("<!")) { // if it's html, you see
-      document.querySelector('iframe').className = 'hidden\'t';
-      document.querySelector('#result').className = 'hidden';
+      document.querySelector('iframe').className = "hidden\'t";
+      document.querySelector('#result').className = "hidden";
       document.querySelector('iframe').src = `./iframe#${text}`
     } else {
-      document.querySelector('iframe').className = 'hidden';
-      document.querySelector('#result').className = 'hidden\'t';
+      document.querySelector('iframe').className = "hidden";
+      document.querySelector('#result').className = "hidden\'t";
       document.querySelector('#result').innerHTML = text;
     }
   })})

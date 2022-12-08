@@ -38,7 +38,7 @@ app.get("/crypt", (req, res) => {
   } else if (usp.get("charsetType") == "default") {
     typeof typeof 0; // do nothing
   } else res.send('what in the dickens have you done to the charset?!; you\'re only supposed to edit the emojis!! bad!!!!') // wait no this won't ever execute uhhhhh
-  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && (usp.has("charset") || usp.get("charsetType") == "default") && usp.toString().split("&").length == 5) { // if it has and only has URLSearchParams from the frontend
+  if (usp.has("method") && usp.has("message") && usp.has("key") && usp.has("iv") && usp.has("charsetType") && (usp.has("charset") && usp.toString().split("&").length == 5) || usp.get("charsetType") == "default") { // if it has and only has URLSearchParams from the frontend
     if (usp.get("charsetType") != "default") {
       if (usp.get("method") == "encrypt") {
         res.send(ClownCryption.encrypt({

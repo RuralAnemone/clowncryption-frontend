@@ -4,5 +4,5 @@ const html = cp?`<textarea autofocus>${atob(decodeURIComponent(hash))}</textarea
 
 document.body.onload=_=>{
     document.write(html)
-    cp?document.querySelector('textarea').select():0
+    cp?document.querySelector('textarea').select():alert('you seem to have done something wrong. 🤡. please try again!')
 }
