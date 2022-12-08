@@ -5,7 +5,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = process.env['PORT'] || 42069;
-const ClownCryption = require('clowncryption');
+const ClownCryption = require('clowncryption').default;
 
 // https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss
 String.prototype.toHHMMSS = function() {
