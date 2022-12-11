@@ -4,7 +4,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = process.env['PORT'] || 42069;
+const port = process.env['PORT'] || 3000;
 const ClownCryption = require('clowncryption').default;
 const { charsets } = require('clowncryption');
 
