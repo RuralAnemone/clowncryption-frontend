@@ -78,12 +78,15 @@ var css = document.querySelector('link[rel="stylesheet"]')
 document.querySelectorAll('input[name="stylesheet"]').forEach(e => e.onclick =_=> {
   if (e.value.includes("water")) {
     css.href = `https://cdn.jsdelivr.net/npm/water.css@2/out/${e.value.includes("default") ? "water" : e.value.includes("dark") ? "dark" : "light"}.css`
+    localStorage.css = e.value.includes("default") ? "water" : e.value.includes("dark") ? "dark" : "light"
   } else {
     css.href = "https://bouncecss.bookie0.repl.co/bounce.css"
+    localStorage.css = "bounce"
   }
 })
 
-
+if (!("css" in localStorage)) localStorage.css = "water"
+css.href = localStorage.css == 'bounce' ? "https://bouncecss.bookie0.repl.co/bounce.css" : `https://cdn.jsdelivr.net/npm/water.css@2/out/${localStorage.css}.css`
 
 // you go down here because you're throwing errors and this script won't run 🤡
 
