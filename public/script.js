@@ -87,6 +87,8 @@ document.querySelectorAll('input[name="stylesheet"]').forEach(e => e.onclick =_=
 
 if (!("css" in localStorage)) localStorage.css = "water"
 css.href = localStorage.css == 'bounce' ? "https://bouncecss.bookie0.repl.co/bounce.css" : `https://cdn.jsdelivr.net/npm/water.css@2/out/${localStorage.css}.css`
+document.querySelector(`input[value="${localStorage.css!='bounce'?`water ${localStorage.css}`:'bounce'}"]`).checked = true;
+// console.log(`input[value="${localStorage.css!='bounce'?`water${localStorage.css!='water'?' '+localStorage.css:''}`:'bounce'}"]`)
 
 // you go down here because you're throwing errors and this script won't run 🤡
 
