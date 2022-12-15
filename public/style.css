@@ -1,5 +1,5 @@
 input[type="text"] {
-    resize: both;
+    resize: both !important;
 }
 
 .jsonButton {
