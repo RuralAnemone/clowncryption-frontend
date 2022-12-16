@@ -90,6 +90,17 @@ css.href = localStorage.css == 'bounce' ? "https://bouncecss.bookie0.repl.co/bou
 document.querySelector(`input[value="${localStorage.css!='bounce'?`water ${localStorage.css!='water'?localStorage.css:'default'}`:'bounce'}"]`).checked = true;
 // console.log(`input[value="${localStorage.css!='bounce'?`water${localStorage.css!='water'?' '+localStorage.css:''}`:'bounce'}"]`)
 
+
+document.querySelector('button.copy').onclick =_=> {
+  navigator.clipboard.writeText(document.querySelector('#result').innerText).then(()=>{
+    document.querySelector('button.copy').innerText = "copied!"
+    setTimeout(()=>{
+      document.querySelector('button.copy').innerText = "Copy result to clipboard"
+    },420.69)
+  }).catch(e=>console.log(e))
+}
+
+
 // you go down here because you're throwing errors and this script won't run 🤡
 
 // --------------------------------------------------------------------
